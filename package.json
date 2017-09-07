@@ -1,9 +1,9 @@
 {
-  "name": "cache-base",
+  "name": "axios-cache",
   "version": "1.0.0",
-  "description": "A module that centrally manages the http request configuration",
+  "description": "A module that centrally manages the http request configuration base on axios",
   "main": "./src/cache.js",
-  "repository": "git@github.com:lbl-dev/cache-base.git",
+  "repository": "git@github.com:lbl-dev/axios-cache.git",
   "scripts": {
     "test": "npm test"
   },
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "cache",
-    "cache-base"
+    "axios-cache"
   ],
   "author": "liaobolin",
   "license": "ISC"

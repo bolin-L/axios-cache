@@ -2,7 +2,7 @@ import axios from 'axios'
 import config from './config'
 import setting from './setting'
 
-const CACHE_KEY = 'cache-base'
+const CACHE_KEY = 'axios-cache'
 export default class BaseCache {
     constructor () {
         // 请求配置
