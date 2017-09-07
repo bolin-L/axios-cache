@@ -1,0 +1,16 @@
+{
+  "name": "cache-base",
+  "version": "1.0.0",
+  "description": "A module that centrally manages the http request configuration",
+  "main": "index.js",
+  "repository": "git@github.com:lbl-dev/cache-base.git",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "cache",
+    "cache-base"
+  ],
+  "author": "liaobolin",
+  "license": "ISC"
+}
