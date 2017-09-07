@@ -2,10 +2,13 @@
   "name": "cache-base",
   "version": "1.0.0",
   "description": "A module that centrally manages the http request configuration",
-  "main": "index.js",
+  "main": "./src/cache.js",
   "repository": "git@github.com:lbl-dev/cache-base.git",
   "scripts": {
     "test": "npm test"
+  },
+  "dependencies": {
+    "axios": "^0.16.2"
   },
   "keywords": [
     "cache",
