@@ -1,6 +1,6 @@
 {
   "name": "axios-cache",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A module that centrally manages the http request configuration base on axios",
   "main": "dist/cache.js",
   "repository": "git@github.com:lbl-dev/axios-cache.git",
