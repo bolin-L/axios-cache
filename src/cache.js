@@ -3,7 +3,7 @@ import config from './config'
 import setting from './setting'
 
 const CACHE_KEY = 'axios-cache'
-export default class BaseCache {
+export default class AxiosCache {
     constructor () {
         // 请求配置
         this.__config = {}
