@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/cache.js',
+    entry: './index.js',
     output: {
         filename: 'cache.js',
         path: path.resolve(__dirname, 'dist')
