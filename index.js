@@ -1,2 +1,2 @@
 import AxiosCache from './src/cache'
-module.exports = AxiosCache
+module.exports = AxiosCache // eslint-disable-line no-undef
