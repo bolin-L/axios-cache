@@ -6,13 +6,20 @@ module.exports = {
         filename: 'cache.js',
         path: path.resolve(__dirname, 'dist')
     },
+    externals: {
+        'axios': 'axios'
+    },
     module: {
         loaders: [
-            {test: /\.js$/, loader: 'babel', exclude: /node_modules/}
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel',
+                query: {
+                    presets: ['es2015'],
+                    plugins: ['add-module-exports']
+                }
+            }
         ]
-    },
-    babel: {
-        presets: ['es2015'],
-        plugins: ['transform-runtime']
     }
 };

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import config from './config'
 import setting from './setting'
+let _ = require('lodash')
 
 const CACHE_KEY = 'axios-cache'
 export default class AxiosCache {
@@ -35,9 +36,11 @@ export default class AxiosCache {
      * @return   {void}
      */
     getMapStatusCodeKey (status) {
-        for (let [key, value] of this.__httpStatus) {
-            if (value.indexOf(status) !== -1) {
-                return key
+        for (let code in this.__httpStatus) {
+            if (this.__httpStatus.hasOwnProperty(code)) {
+                if (this.__httpStatus[code].indexOf(status) !== -1) {
+                    return code
+                }
             }
         }
     }
@@ -73,19 +76,66 @@ export default class AxiosCache {
      * @return      {void}
      */
     sendRequest (key, options) {
-        let conf = (this.__config[this.settingKey] || {})[key]
+        let conf = _.cloneDeep((this.__config[this.settingKey] || {})[key])
+        if (!conf) {
+            throw new Error(`can not find config key ${this.settingKey}`)
+        }
+        let reg0 = /\{(.*?)\}/gi
+        /* eslint-disable */
+        let reg1 = /:([^-\/|\.]*)/gi
         if (!key && typeof key !== 'string' || !conf) {
             return
         }
         conf = Object.assign(conf, options)
+        let params = options.params || {}
+        let data = options.data || {}
+        // rest接口参数替换
+        if (conf.rest) {
+            conf.url = conf.url.replace(reg0, function ($0, $1) {
+                return params[$1] ? params[$1] : (data[$1] ? data[$1] : $0)
+            }).replace(reg1, function ($0, $1) {
+                return params[$1] ? params[$1] : (data[$1] ? data[$1] : $0)
+            });
+        }
+        // 非异步接口
+        if (conf.ajax === false) {
+            window.open(conf.url, conf.target ? conf.target : '_blank')
+            return
+        }
+        // local get mock
+        // mock example
+        // {
+        //     code: 2xx|3xx|4xx||5xx,
+        //     message: '',
+        //     result: array|object|...
+        // }
+        if (location.host.indexOf('localhost') !== -1 && conf.mock) {
+            this.cbRequest(conf.mock, options, conf)
+            return
+        }
+        // ajax
         axios(conf)
             .then(function (response) {
-                let codeKey = this.getMapStatusCodeKey(response.status)
-                if (this.__clientCode[codeKey] === this.__clientCode.CODE_OK) {
-                    options.onload && options.onload(response.data)
-                } else {
-                    this.handleErrorCase(this.__clientCode[codeKey], response.data)
-                }
-            })
+                this.cbRequest(response.data, options, conf)
+            }.bind(this))
+    }
+    /**
+     * ajax callback
+     *
+     * @param    {Object}           result                      ajax or mock response
+     * @param    {Object}           options                     request data
+     * @param    {Object}           conf                        api config
+     * @return   {void}
+     */
+    cbRequest (result, options, conf) {
+        conf.format && conf.format(result, options)
+        let codeKey = this.getMapStatusCodeKey(options.resetReturnCode === undefined ? response.data.code : options.resetReturnCode)
+        if (this.__clientCode[codeKey] === this.__clientCode.CODE_OK) {
+            conf.post && conf.post(result, options)
+            options.onload && options.onload(result)
+        } else {
+            options.onerror && options.onerror(response.data)
+            this.handleErrorCase(this.__clientCode[codeKey], result)
+        }
     }
 }

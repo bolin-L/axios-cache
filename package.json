@@ -1,14 +1,16 @@
 {
   "name": "axios-cache",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A module that centrally manages the http request configuration base on axios",
   "main": "dist/cache.js",
   "repository": "git@github.com:lbl-dev/axios-cache.git",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "build": "webpack"
   },
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.16.2",
+    "babel-plugin-add-module-exports": "^0.2.1"
   },
   "keywords": [
     "cache",

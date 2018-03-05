@@ -1,2 +1,5 @@
 import AxiosCache from './src/cache'
-module.exports = AxiosCache // eslint-disable-line no-undef
+const Cache = {
+    AxiosCache
+}
+module.exports = Cache // eslint-disable-line no-undef
