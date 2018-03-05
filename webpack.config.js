@@ -6,9 +6,6 @@ module.exports = {
         filename: 'cache.js',
         path: path.resolve(__dirname, 'dist')
     },
-    externals: {
-        'axios': 'axios'
-    },
     module: {
         loaders: [
             {
