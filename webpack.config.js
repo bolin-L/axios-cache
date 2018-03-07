@@ -1,22 +1,20 @@
 const path = require('path');
 
 module.exports = {
-    entry: './index.js',
+    entry: './src/cache.js',
     output: {
         filename: 'cache.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        libraryTarget: 'commonjs2'
     },
     module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel',
-                query: {
-                    presets: ['es2015'],
-                    plugins: ['add-module-exports']
-                }
-            }
-        ]
+        loaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+        }]
+    },
+    babel: {
+        presets: ['es2015']
     }
 };

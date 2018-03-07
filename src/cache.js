@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from './config'
 import setting from './setting'
-let _ = require('lodash')
+import _ from 'lodash'
 
 const CACHE_KEY = 'axios-cache'
 export default class AxiosCache {
@@ -129,12 +129,12 @@ export default class AxiosCache {
      */
     cbRequest (result, options, conf) {
         conf.format && conf.format(result, options)
-        let codeKey = this.getMapStatusCodeKey(options.resetReturnCode === undefined ? response.data.code : options.resetReturnCode)
+        let codeKey = this.getMapStatusCodeKey(options.resetReturnCode === undefined ? result.code : options.resetReturnCode)
         if (this.__clientCode[codeKey] === this.__clientCode.CODE_OK) {
             conf.post && conf.post(result, options)
             options.onload && options.onload(result)
         } else {
-            options.onerror && options.onerror(response.data)
+            options.onerror && options.onerror(result)
             this.handleErrorCase(this.__clientCode[codeKey], result)
         }
     }
