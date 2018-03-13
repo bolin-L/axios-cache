@@ -1,9 +1,9 @@
 {
   "name": "axios-cache",
-  "version": "1.1.1",
-  "description": "A module that centrally manages the http request configuration base on axios",
+  "version": "1.0.0",
+  "description": "基于axios库封装的集中管理异步请求配置的模块",
   "main": "dist/cache.js",
-  "repository": "git@github.com:lbl-dev/axios-cache.git",
+  "repository": "git@github.com:bolin-L/axios-cache.git",
   "scripts": {
     "test": "npm test",
     "build": "webpack"
@@ -13,10 +13,12 @@
   },
   "keywords": [
     "cache",
-    "axios-cache"
+    "axios-cache",
+    "ajax",
+    "axios"
   ],
   "author": "liaobolin",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
