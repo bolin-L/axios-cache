@@ -1,6 +1,6 @@
 {
   "name": "axios-cache",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "基于axios库封装的集中管理异步请求配置的模块",
   "main": "dist/cache.js",
   "repository": "git@github.com:bolin-L/axios-cache.git",
